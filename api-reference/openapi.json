@@ -161,7 +161,6 @@
   },
   "components": {
     "schemas": {
-      
       "Plant": {
         "required": [
           "name"
@@ -170,26 +169,38 @@
         "properties": {
           "name": {
             "description": "The name of the plant",
-            "type": "string"
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 10,
+            "pattern": "^[a-z]+$",
+            "enum": [
+              "plant1",
+              "plant2",
+              "plant3"
+            ]
           },
           "tag": {
             "description": "Tag to specify the type",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z]+$"
           }
-        },
-        "ComplexPlant": {
-          "required": {
-             "age"
+        }
+      },
+      "ComplexPlant": {
+        "required": [
+          "age"
+        ],
+        "type": "object",
+        "properties": {
+          "age": {
+            "description": " how old the plant is",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100,
+            "multipleOf": 2
           },
-          "type": "object",
-          "properties": {
-            "age": {
-              "description": " how old the plant is",
-              "type": "string"
-            }
-            "subplant": {
-              "$ref": "#/components/schemas/NewPlant"
-            }
+          "subplant": {
+            "$ref": "#/components/schemas/NewPlant"
           }
         }
       },
