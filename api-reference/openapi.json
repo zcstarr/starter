@@ -66,7 +66,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/NewPlant"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ComplexPlant"
+                  }
+                ]
               }
             }
           },
@@ -154,6 +161,7 @@
   },
   "components": {
     "schemas": {
+      
       "Plant": {
         "required": [
           "name"
@@ -167,6 +175,21 @@
           "tag": {
             "description": "Tag to specify the type",
             "type": "string"
+          }
+        },
+        "ComplexPlant": {
+          "required": {
+             "age"
+          },
+          "type": "object",
+          "properties": {
+            "age": {
+              "description": " how old the plant is",
+              "type": "string"
+            }
+            "subplant": {
+              "$ref": "#/components/schemas/NewPlant"
+            }
           }
         }
       },
